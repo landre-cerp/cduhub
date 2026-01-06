@@ -612,13 +612,13 @@ namespace WwDevicesDotNet.WinWing.Pap3
             if(!IsConnected)
                 return;
 
-            // Release first (allow knob to pop up)
+            // Release first (allow A/T ARM switch to release)
             SendCommand(BuildReleaseSolenoidCommand());
             
             // Small delay
             System.Threading.Thread.Sleep(50);
             
-            // Then engage (lock knob down)
+            // Then engage (lock A/T ARM switch)
             SendCommand(BuildEngageSolenoidCommand());
         }
 
@@ -631,7 +631,7 @@ namespace WwDevicesDotNet.WinWing.Pap3
         byte[] BuildEngageSolenoidCommand()
         {
             // Engage (arm) solenoid command uses display prefix (0x0FBF)
-            // Captured behavior: This LOCKS the knob down (arms the solenoid)
+            // Captured behavior: This LOCKS the A/T ARM switch (arms the solenoid)
             // Packet: 02 0f bf 00 00 03 49 1e 01 00 00 00 00 00
             var packet = new byte[14];
             packet[0] = 0x02;
@@ -642,7 +642,7 @@ namespace WwDevicesDotNet.WinWing.Pap3
             packet[5] = 0x03;
             packet[6] = 0x49;
             packet[7] = 0x1E;  // Solenoid command code
-            packet[8] = 0x01;  // Engage (arm) value - locks knob down
+            packet[8] = 0x01;  // Engage (arm) value - locks A/T ARM switch
             // Remaining bytes 9-13 are 0x00
             return packet;
         }
@@ -650,7 +650,7 @@ namespace WwDevicesDotNet.WinWing.Pap3
         byte[] BuildReleaseSolenoidCommand()
         {
             // Release (disarm) solenoid command
-            // Captured behavior: This RELEASES the knob (allows it to pop up)
+            // Captured behavior: This RELEASES the A/T ARM switch (allows it to move freely)
             // Packet: 02 0f bf 00 00 03 49 1e 00 00 00 00 00 00
             var packet = new byte[14];
             packet[0] = 0x02;
@@ -661,7 +661,7 @@ namespace WwDevicesDotNet.WinWing.Pap3
             packet[5] = 0x03;
             packet[6] = 0x49;
             packet[7] = 0x1E;  // Solenoid command code
-            packet[8] = 0x00;  // Release (disarm) value - allows knob to pop up
+            packet[8] = 0x00;  // Release (disarm) value - allows A/T ARM switch to move freely
             // Remaining bytes 9-13 are 0x00
             return packet;
         }
