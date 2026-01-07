@@ -45,6 +45,8 @@ namespace WwDevicesDotNet.WinWing.Pap3
 
         /// <summary>
         /// Pilot course value (3 digits, 0-359). For backward compatibility.
+        /// No validation is performed as the underlying storage supports alphanumeric values via PltCourse.
+        /// Values outside the expected range may be truncated during display encoding.
         /// </summary>
         public int? PltCourseValue
         {
@@ -64,6 +66,8 @@ namespace WwDevicesDotNet.WinWing.Pap3
 
         /// <summary>
         /// Copilot course value (3 digits, 0-359). For backward compatibility.
+        /// No validation is performed as the underlying storage supports alphanumeric values via CplCourse.
+        /// Values outside the expected range may be truncated during display encoding.
         /// </summary>
         public int? CplCourseValue
         {
