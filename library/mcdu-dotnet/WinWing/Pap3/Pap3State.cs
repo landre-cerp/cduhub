@@ -44,7 +44,9 @@ namespace WwDevicesDotNet.WinWing.Pap3
         }
 
         /// <summary>
-        /// Pilot course value (3 digits, 0-359). For backward compatibility.
+        /// Pilot course value (numeric). For backward compatibility.
+        /// Values are formatted as 3 digits but not validated (e.g., 359 becomes "359").
+        /// No range validation is performed since the display supports alphanumeric characters.
         /// </summary>
         public int? PltCourseValue
         {
@@ -63,7 +65,9 @@ namespace WwDevicesDotNet.WinWing.Pap3
         }
 
         /// <summary>
-        /// Copilot course value (3 digits, 0-359). For backward compatibility.
+        /// Copilot course value (numeric). For backward compatibility.
+        /// Values are formatted as 3 digits but not validated (e.g., 359 becomes "359").
+        /// No range validation is performed since the display supports alphanumeric characters.
         /// </summary>
         public int? CplCourseValue
         {
