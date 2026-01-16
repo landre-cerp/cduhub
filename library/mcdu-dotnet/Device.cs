@@ -54,5 +54,10 @@ namespace WwDevicesDotNet
         /// A WinWing PAP-3 Primary Autopilot Panel.
         /// </summary>
         WinWingPap3,
+
+        /// <summary>
+        /// A WinWing PFP-4.
+        /// </summary>
+        WinWingPfp4,
     }
 }
