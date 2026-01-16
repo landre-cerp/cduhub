@@ -13,6 +13,7 @@ using System.Linq;
 using HidSharp;
 using WwDevicesDotNet.WinWing.FcuAndEfis;
 using WwDevicesDotNet.WinWing.Pap3;
+using WwDevicesDotNet.WinWing.Pdc3nm;
 
 namespace WwDevicesDotNet
 {
@@ -126,6 +127,11 @@ namespace WwDevicesDotNet
                             var pap3 = new Pap3Device(hidDevice, deviceId);
                             pap3.Initialise();
                             result = pap3;
+                            break;
+                        case Device.WinWingPdc3n:
+                            var pdc3 = new Pdc3Device(hidDevice, deviceId);
+                            pdc3.Initialise();
+                            result = pdc3;
                             break;
                     }
                 }

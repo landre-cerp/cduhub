@@ -136,6 +136,20 @@ namespace WwDevicesDotNet
             "Winwing PFP-4 (First Officer)", 0x4098, 0xBB40, Device.WinWingPfp4, DeviceUser.NotApplicable, DeviceType.Boeing747Cdu
         );
 
+        /// <summary>
+        /// The identifier for a WinWing PDC-3 device Left PDC unit.
+        /// </summary>
+        public static readonly DeviceIdentifier WinWingPdc3NDeviceLeft = new DeviceIdentifier(
+            "Winwing PDC-3NL", 0x4098, 0xBB61, Device.WinWingPdc3n, DeviceUser.NotApplicable, DeviceType.PDC3N
+        );
+
+        /// <summary>
+        /// The identifier for a WinWing PDC-3 device configured as Right unit.
+        /// </summary>
+        public static readonly DeviceIdentifier WinWingPdc3NDeviceRight = new DeviceIdentifier(
+            "Winwing PDC-3NR", 0x4098, 0xBB62, Device.WinWingPdc3n, DeviceUser.NotApplicable, DeviceType.PDC3N
+        );
+
 
         private static readonly DeviceIdentifier[] _AllSupportedDevices = new DeviceIdentifier[] {
             WinWingMcduCaptainDevice,
@@ -161,6 +175,8 @@ namespace WwDevicesDotNet
             WinWingFcuRightEfisDevice,
             WinWingFcuBothEfisDevice,
             WinWingPap3Device,
+            WinWingPdc3NDeviceLeft,
+            WinWingPdc3NDeviceRight,
         };
 
         /// <summary>
