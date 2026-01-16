@@ -144,7 +144,7 @@ namespace WwDevicesDotNet
         );
 
         /// <summary>
-        /// The identifier for a WinWing PDC-3 device configure as Right unit.
+        /// The identifier for a WinWing PDC-3 device configured as Right unit.
         /// </summary>
         public static readonly DeviceIdentifier WinWingPdc3NDeviceRight = new DeviceIdentifier(
             "Winwing PDC-3NR", 0x4098, 0xBB62, Device.WinWingPdc3n, DeviceUser.NotApplicable, DeviceType.PDC3N
