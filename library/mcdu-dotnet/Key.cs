@@ -31,6 +31,7 @@ namespace WwDevicesDotNet
         Airport,
         Altn,
         AtcComm,
+        Atc,
         Blank1,
         Blank2,
         Brt,

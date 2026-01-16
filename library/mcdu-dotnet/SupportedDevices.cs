@@ -115,6 +115,28 @@ namespace WwDevicesDotNet
             "Winwing PAP-3", 0x4098, 0xBF0F, Device.WinWingPap3, DeviceUser.NotApplicable, DeviceType.Boeing737FrontPanel
         );
 
+        /// <summary>
+        /// The identifier for a WinWing PFP-4 device set as Captain/Left seat.
+        /// </summary>
+        public static readonly DeviceIdentifier WinWingPfp4CaptainDevice = new DeviceIdentifier(
+            "Winwing PFP-4 (Captain)", 0x4098, 0xBB38, Device.WinWingPfp4, DeviceUser.NotApplicable, DeviceType.Boeing747Cdu
+        );
+
+        /// <summary>
+        /// The identifier for a WinWing PFP-4 device set as Observer seat.
+        /// </summary>
+        public static readonly DeviceIdentifier WinWingPfp4ObserverDevice = new DeviceIdentifier(
+            "Winwing PFP-4 (Observer)", 0x4098, 0xBB3C, Device.WinWingPfp4, DeviceUser.NotApplicable, DeviceType.Boeing747Cdu
+        );
+
+        /// <summary>
+        /// The identifier for a WinWing PFP-4 device set as First Officer/Right seat.
+        /// </summary>
+        public static readonly DeviceIdentifier WinWingPfp4FirstOfficerDevice = new DeviceIdentifier(
+            "Winwing PFP-4 (First Officer)", 0x4098, 0xBB40, Device.WinWingPfp4, DeviceUser.NotApplicable, DeviceType.Boeing747Cdu
+        );
+
+
         private static readonly DeviceIdentifier[] _AllSupportedDevices = new DeviceIdentifier[] {
             WinWingMcduCaptainDevice,
             WinWingMcduFirstOfficerDevice,
@@ -127,6 +149,10 @@ namespace WwDevicesDotNet
             WinWingPfp7CaptainDevice,
             WinWingPfp7FirstOfficerDevice,
             WinWingPfp7ObserverDevice,
+
+            WinWingPfp4CaptainDevice,
+            WinWingPfp4FirstOfficerDevice,
+            WinWingPfp4ObserverDevice
         };
 
         private static readonly DeviceIdentifier[] _AllSupportedFrontpanels = new DeviceIdentifier[] {

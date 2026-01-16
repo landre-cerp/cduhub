@@ -14,6 +14,7 @@ using HidSharp;
 using WwDevicesDotNet.WinWing.Mcdu;
 using WwDevicesDotNet.WinWing.Pfp3N;
 using WwDevicesDotNet.WinWing.Pfp7;
+using WwDevicesDotNet.WinWing.Pfp4;
 
 namespace WwDevicesDotNet
 {
@@ -137,6 +138,11 @@ namespace WwDevicesDotNet
                             var pfp7 = new Pfp7Device(hidDevice, deviceId);
                             pfp7.Initialise();
                             result = pfp7;
+                            break;
+                        case Device.WinWingPfp4:
+                            var pfp4 = new Pfp4Device(hidDevice, deviceId);
+                            pfp4.Initialise();
+                            result = pfp4;
                             break;
                     }
                 }
