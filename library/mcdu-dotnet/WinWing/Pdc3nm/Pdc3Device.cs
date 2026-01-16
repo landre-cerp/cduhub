@@ -129,12 +129,6 @@ namespace WwDevicesDotNet.WinWing.Pdc3nm
 
        
      
-        /// <inheritdoc/>
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-
         public override void UpdateDisplay(IFrontpanelState state)
         {
 
