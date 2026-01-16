@@ -56,7 +56,7 @@ namespace WwDevicesDotNet
         WinWingPap3,
 
         /// <summary>
-        /// A winWing PFP-4.
+        /// A WinWing PFP-4.
         /// </summary>
         WinWingPfp4,
     }
