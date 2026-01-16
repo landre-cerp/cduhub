@@ -28,8 +28,6 @@ namespace WwDevicesDotNet.WinWing.Pdc3nm
         const byte _BrightnessPanelBacklight = 0x00;
 
 
-        ushort _SequenceNumber = 0;
-
         /// <summary>
         /// Gets the native value from the device's left ambient light sensor.
         /// </summary>
