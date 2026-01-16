@@ -30,5 +30,8 @@ namespace WwDevicesDotNet
         Boeing737FrontPanel,
 
         Boeing747Cdu,
+
+        PDC3N,
+        PDC3M,
     }
 }
