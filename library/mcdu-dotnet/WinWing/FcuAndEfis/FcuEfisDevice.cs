@@ -407,7 +407,7 @@ namespace WwDevicesDotNet.WinWing.FcuAndEfis
             var payload = new byte[64];
             var followup = new byte[64];
             
-            // Use fixed package number 1
+            // Use fixed sequence number 1
             ushort seqNum = 1;
 
             // First packet (payload)
