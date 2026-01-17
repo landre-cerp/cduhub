@@ -104,8 +104,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pap3-leds", "library\sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pap3-ambient", "library\samples\pap3-ambient\pap3-ambient.csproj", "{8C91A493-C7F2-BF3C-63D4-1475D4C2F1D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fcuefis-display", "library\samples\fcuefis-display\fcuefis-display.csproj", "{98729769-E99F-0A6D-16B2-44106FC942A8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,10 +190,6 @@ Global
 		{8C91A493-C7F2-BF3C-63D4-1475D4C2F1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C91A493-C7F2-BF3C-63D4-1475D4C2F1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C91A493-C7F2-BF3C-63D4-1475D4C2F1D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98729769-E99F-0A6D-16B2-44106FC942A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98729769-E99F-0A6D-16B2-44106FC942A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98729769-E99F-0A6D-16B2-44106FC942A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98729769-E99F-0A6D-16B2-44106FC942A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,7 +218,6 @@ Global
 		{4ECAF514-9F92-D88F-CF80-9078099107C5} = {61A9C6CD-82AE-494E-86C9-21644DAADBD6}
 		{A1F4DA5B-F6B4-9526-90DD-ACFDDB5F2C0D} = {61A9C6CD-82AE-494E-86C9-21644DAADBD6}
 		{8C91A493-C7F2-BF3C-63D4-1475D4C2F1D3} = {61A9C6CD-82AE-494E-86C9-21644DAADBD6}
-		{98729769-E99F-0A6D-16B2-44106FC942A8} = {61A9C6CD-82AE-494E-86C9-21644DAADBD6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C977F7C9-07B7-4BB4-A182-FDE6F96F171A}
