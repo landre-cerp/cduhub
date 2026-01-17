@@ -130,11 +130,11 @@ namespace WwDevicesDotNet.WinWing.FcuAndEfis
 
             // Build EFIS display commands if panels are present
             if(HasLeftEfis() && state.LeftBaroPressure.HasValue) {
-                commands.Add(BuildEfisDisplayCommand(_LeftEfisPrefix, state.LeftBaroPressure.Value, state.LeftBaroQnh, state.LeftBaroQfe));
+                commands.AddRange(BuildEfisDisplayCommand(_LeftEfisPrefix, state.LeftBaroPressure.Value, state.LeftBaroQnh, state.LeftBaroQfe));
             }
 
             if(HasRightEfis() && state.RightBaroPressure.HasValue) {
-                commands.Add(BuildEfisDisplayCommand(_RightEfisPrefix, state.RightBaroPressure.Value, state.RightBaroQnh, state.RightBaroQfe));
+                commands.AddRange(BuildEfisDisplayCommand(_RightEfisPrefix, state.RightBaroPressure.Value, state.RightBaroQnh, state.RightBaroQfe));
             }
 
             return commands;
@@ -401,31 +401,34 @@ namespace WwDevicesDotNet.WinWing.FcuAndEfis
             return result;
         }
 
-        byte[] BuildEfisDisplayCommand(ushort prefix, int pressure, bool qnh, bool qfe)
+        List<byte[]> BuildEfisDisplayCommand(ushort prefix, int pressure, bool qnh, bool qfe)
         {
-            var packet = new byte[64];
+            var commands = new List<byte[]>();
+            var payload = new byte[64];
+            var followup = new byte[64];
             
-            // Use fixed package number 1
+            // Use fixed sequence number 1
             ushort seqNum = 1;
 
-            packet[0] = 0xF0;
-            packet[1] = 0x00;
-            packet[2] = (byte)seqNum;
-            packet[3] = 0x1A;  
-            packet[4] = (byte)((prefix >> 8) & 0xFF);
-            packet[5] = (byte)(prefix & 0xFF);
-            packet[6] = 0x00;
-            packet[7] = 0x00;
-            packet[8] = 0x02;
-            packet[9] = 0x01;
-            packet[10] = 0x00;
-            packet[11] = 0x00;
-            packet[12] = 0xFF;  
-            packet[13] = 0xFF;  
-            packet[14] = 0x1D;  
-            packet[15] = 0x00;
-            packet[16] = 0x00;
-            packet[17] = 0x09;
+            // First packet (payload)
+            payload[0] = 0xF0;
+            payload[1] = 0x00;
+            payload[2] = (byte)seqNum;
+            payload[3] = 0x1A;  
+            payload[4] = (byte)((prefix >> 8) & 0xFF);
+            payload[5] = (byte)(prefix & 0xFF);
+            payload[6] = 0x00;
+            payload[7] = 0x00;
+            payload[8] = 0x02;
+            payload[9] = 0x01;
+            payload[10] = 0x00;
+            payload[11] = 0x00;
+            payload[12] = 0xFF;  
+            payload[13] = 0xFF;  
+            payload[14] = 0x1D;  
+            payload[15] = 0x00;
+            payload[16] = 0x00;
+            payload[17] = 0x09;
             // Bytes 18-24 are 0x00
 
             var pressureStr = pressure.ToString().PadLeft(4, '0');
@@ -436,40 +439,49 @@ namespace WwDevicesDotNet.WinWing.FcuAndEfis
             
             var encoded = DataFromStringSwappedEfis(4, pressureStr);
             
-            packet[0x19] = encoded[0];  // leftmost digit (thousands)
-            packet[0x1A] = encoded[1];  // hundreds
-            packet[0x1B] = encoded[2];  // tens
-            packet[0x1C] = encoded[3];  // ones (rightmost)
+            payload[0x19] = encoded[0];  // leftmost digit (thousands)
+            payload[0x1A] = encoded[1];  // hundreds
+            payload[0x1B] = encoded[2];  // tens
+            payload[0x1C] = encoded[3];  // ones (rightmost)
 
             // Add decimal point for inHg mode (after 2nd digit, not 3rd)
             // For 2992: display as 29.92 (decimal after hundreds digit)
             // The decimal point in EFIS encoding is bit 0x80 (not 0x01 like in FCU displays)
             // This is because DataFromStringSwappedEfis remaps: 0x01 → 0x80
             if(isInHg) {
-                packet[0x1A] |= 0x80;  // Add decimal point after hundreds digit (29.92)
+                payload[0x1A] |= 0x80;  // Add decimal point after hundreds digit (29.92)
             }
 
             // QNH/QFE indicators at offset 0x1D (29)
             if(qfe) {
-                packet[0x1D] = 0x01;
+                payload[0x1D] = 0x01;
             } else if(qnh) {
-                packet[0x1D] = 0x02;
+                payload[0x1D] = 0x02;
             }
 
-            // Add followup packet bytes (Python sends both in one packet)
-            packet[0x1E] = (byte)((prefix >> 8) & 0xFF);
-            packet[0x1F] = (byte)(prefix & 0xFF);
-            packet[0x20] = 0x00;
-            packet[0x21] = 0x00;
-            packet[0x22] = 0x03;
-            packet[0x23] = 0x01;
-            packet[0x24] = 0x00;
-            packet[0x25] = 0x00;
-            packet[0x26] = 0x4C;
-            packet[0x27] = 0x0C;
-            packet[0x28] = 0x1D;
+            commands.Add(payload);
 
-            return packet;
+            // Second packet (followup)
+            followup[0] = 0xF0;
+            followup[1] = 0x00;
+            followup[2] = (byte)seqNum;
+            followup[3] = 0x11;
+            followup[4] = (byte)((prefix >> 8) & 0xFF);
+            followup[5] = (byte)(prefix & 0xFF);
+            followup[6] = 0x00;
+            followup[7] = 0x00;
+            followup[8] = 0x03;
+            followup[9] = 0x01;
+            followup[10] = 0x00;
+            followup[11] = 0x00;
+            followup[12] = 0x4C;
+            followup[13] = 0x0C;
+            followup[14] = 0x1D;
+            // Remaining bytes are 0x00
+
+            commands.Add(followup);
+
+            return commands;
         }
 
         byte[] DataFromStringSwappedEfis(int numDigits, string str)
